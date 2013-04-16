@@ -31,13 +31,13 @@
 
 - (void)updateRelationshipStatusOnFacebook;
 - (void)startDrinkingHeavily;
-- (void)startTryingToPickUpCollegeGirls;
+- (void)signUpForOnlineDatingService;
 @end
 
 @implementation TKSpecPerson
 - (void)updateRelationshipStatusOnFacebook {}
 - (void)startDrinkingHeavily {}
-- (void)startTryingToPickUpCollegeGirls {}
+- (void)signUpForOnlineDatingService {}
 @end
 
 SPEC_BEGIN(TKStateMachineSpec)
@@ -292,7 +292,7 @@ describe(@"A State Machine Modeling Dating", ^{
         [divorce setDidFireEventBlock:^(TKEvent *event, TKStateMachine *stateMachine) {
             person.consultingLawyer = NO;
             [person startDrinkingHeavily];
-            [person startTryingToPickUpCollegeGirls];
+            [person signUpForOnlineDatingService];
         }];
         
         [stateMachine addEvents:@[ startDating, breakup, getMarried, divorce ]];
@@ -446,8 +446,8 @@ describe(@"A State Machine Modeling Dating", ^{
                 [stateMachine fireEvent:@"Divorce" error:nil];
             });
             
-            it(@"starts trying to pick up college girls", ^{
-                [[person should] receive:@selector(startTryingToPickUpCollegeGirls)];
+            it(@"signs up for an online dating service", ^{
+                [[person should] receive:@selector(signUpForOnlineDatingService)];
                 [stateMachine fireEvent:@"Divorce" error:nil];
             });
         });
